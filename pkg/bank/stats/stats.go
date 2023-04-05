@@ -1,6 +1,8 @@
 package stats
 
-import "github.com/harryfinder/average/pkg/bank/types"
+import (
+	"github.com/harryfinder/average/pkg/bank/types"
+)
 
 func Avg(payments []types.Payment) types.Money {
 	var length int
@@ -13,4 +15,14 @@ func Avg(payments []types.Payment) types.Money {
 	average := types.Money(sum / int64(length))
 
 	return average
+}
+
+func TotalInCategory(payments []types.Payment, category types.Category) types.Money {
+	var sum types.Money
+	for _, operations := range payments {
+		if category == operations.Category {
+			sum += operations.Amount
+		}
+	}
+	return sum
 }
